@@ -15,9 +15,9 @@ class Cliente(EntidadBase):
 
     @nombre.setter
     def nombre(self, valor):
-        if not valor.strip():
+        if not valor or not valor.strip():
             raise ClienteInvalidoError("Nombre vacío")
-        self._nombre = valor
+        self._nombre = valor.strip()
 
     @property
     def email(self):
