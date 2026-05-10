@@ -2,13 +2,27 @@ import re
 from modelos.entidad_base import EntidadBase
 from excepciones.excepciones import ClienteInvalidoError
 
+
 class Cliente(EntidadBase):
-    def __init__(self, nombre, email, telefono):
+    def __init__(self, id_cliente, nombre, email, telefono):
         super().__init__()
+        self.id_cliente = id_cliente
         self.nombre = nombre
         self.email = email
         self.telefono = telefono
 
+    # ID
+    @property
+    def id_cliente(self):
+        return self._id_cliente
+
+    @id_cliente.setter
+    def id_cliente(self, valor):
+        if not str(valor).strip():
+            raise ClienteInvalidoError("ID vacío")
+        self._id_cliente = valor
+
+    # Nombre
     @property
     def nombre(self):
         return self._nombre
@@ -19,6 +33,7 @@ class Cliente(EntidadBase):
             raise ClienteInvalidoError("Nombre vacío")
         self._nombre = valor
 
+    # Email
     @property
     def email(self):
         return self._email
@@ -30,6 +45,7 @@ class Cliente(EntidadBase):
             raise ClienteInvalidoError("Email inválido")
         self._email = valor
 
+    # Teléfono
     @property
     def telefono(self):
         return self._telefono
@@ -40,5 +56,9 @@ class Cliente(EntidadBase):
             raise ClienteInvalidoError("Teléfono inválido")
         self._telefono = valor
 
+    # Métodos
     def mostrar_info(self):
-        return f"Cliente: {self.nombre} - {self.email}"
+        return f"ID: {self.id_cliente} - Cliente: {self.nombre} - Email: {self.email}"
+
+    def __str__(self):
+        return f"{self.nombre} - {self.email}"
