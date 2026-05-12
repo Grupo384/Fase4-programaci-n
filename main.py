@@ -1,5 +1,5 @@
-from modelos.cliente import cliente
-from registros.logs import registrar_log
+from modelos.Cliente import Cliente
+from logs.logs import registrar_log
 
 def prueba_clientes():
     print("Creando clientes...")
